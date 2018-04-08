@@ -89,13 +89,9 @@ function isLeapYear(date)
  */
 function timeSpanToString(startDate, endDate)
 {
-	let ms = endDate - startDate;
-	let hours = Math.trunc(ms / 3600000 % 100).toString().padStart(2, '0');
-	let mins = Math.trunc(ms / 60000 % 60).toString().padStart(2, '0');
-	let secs = Math.trunc(ms / 1000 % 60).toString().padStart(2, '0');
-	let msecs = Math.trunc(ms % 1000).toString().padStart(3, '0');
-	return hours + ':' + mins + ':' + secs + '.' + msecs;
+	return new Date(endDate - startDate).toISOString().slice(11, -1);
 }
+
 
 
 /**
