@@ -57,7 +57,8 @@ function parseDataFromIso8601(value)
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(date) {
+function isLeapYear(date)
+{
     let year = date.getFullYear();
 	if ((year % 4 == 0) && (year % 100 != 0))
 	{
@@ -86,13 +87,14 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-function timeSpanToString(startDate, endDate) {
-    let diff_time = Math.abs(endDate - startDate);
-	let hours = Math.trunc(diff_time/(60*60*1000) % 100).toString().padStart(2,'00');
-	let minutes = Math.trunc(diff_time/(60*1000) % 60).toString().padStart(2,'00');
-	let secs = Math.trunc(diff_time/(1000) % 60).toString().padStart(2,'00');
-	let msecs = Math.trunc(diff_time % 1000).toString().padStart(3,'000');
-	return hours + ':' + minutes + ':' + secs + '.' + msecs;
+function timeSpanToString(startDate, endDate)
+{
+    let ms = endDate - startDate;
+	let hours = Math.trunc(ms / 3600000 % 100).toString().padStart(2, '0');
+	let mins = Math.trunc(ms / 60000 % 60).toString().padStart(2, '0');
+	let secs = Math.trunc(ms / 1000 % 60).toString().padStart(2, '0');
+	let msecs = Math.trunc(ms % 1000).toString().padStart(3, '0');
+	return hours + ':' + mins + ':' + secs + '.' + msecs;
 }
 
 
@@ -109,11 +111,13 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(date) {
+function angleBetweenClockHands(date)
+{
     let hoursHand = 0.5 * (60 * (date.getUTCHours() % 12) + date.getUTCMinutes());
     let minutesHand = 6 * date.getUTCMinutes();
     let result = Math.abs(hoursHand - minutesHand);
-    if (result > 180) {
+    if (result > 180)
+	{
     	result = 360 - result;
     }
     return result * Math.PI / 180;
