@@ -23,6 +23,7 @@
  */
 function concatenateStrings(value1, value2)
 {
+	//return value1+value2;//("".concat(value,value2));
 	return ("".concat(value1,value2));
 }
 
